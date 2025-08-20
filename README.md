@@ -4,6 +4,20 @@ This project was generated using [Angular CLI](https://github.com/angular/angula
 
 ## Development server
 
+To test code - it will install node module and then will do ng serve
+```bash
+npm run start:with-install
+```
+
+Implemented 2 approach
+1. with Edit/Save Button
+http://localhost:4200/list
+
+2. With Directive
+double click for navigation
+Single click in cell for inline edit
+http://localhost:4200/home
+
 To start a local development server, run:
 
 ```bash
