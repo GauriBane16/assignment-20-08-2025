@@ -1,0 +1,48 @@
+<div class="row">
+    <div class="col-12">
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Name</th>
+                    <th>Bio</th>
+                    <th>Language</th>
+                    <th>Version</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                @for(user of data; track user.id; let i = $index){
+                <tr [class.table-active]="user.isEditing">
+                <!-- <tr *ngFor="let user of data" [class.table-active]="user.isEditing"> -->
+                    <td>{{ user.id }}</td>
+                    @if(!user.isEditing){
+                        <td>{{user.name}}</td>
+                    }@else{
+                        <td><input [(ngModel)]="user.name" class="form-control" /></td>
+                    }
+                    <!-- <td *ngIf="!user.isEditing; else editName">{{ user.name }}</td> -->
+                    <ng-template #editName>
+                        <td><input [(ngModel)]="user.name" class="form-control" /></td>
+                    </ng-template>
+
+                    <td *ngIf="!user.isEditing; else editBio">{{ user.bio }}</td>
+                    <ng-template #editBio>
+                        <td><input [(ngModel)]="user.bio" class="form-control" /></td>
+                    </ng-template>
+
+                    <td *ngIf="!user.isEditing; else editLanguage">{{ user.language }}</td>
+                    <ng-template #editLanguage>
+                        <td><input [(ngModel)]="user.language" class="form-control" /></td>
+                    </ng-template>
+
+                    <td>
+                        <button *ngIf="!user.isEditing" (click)="enableEdit(user)" class="btn btn-primary btn-sm">Edit</button>
+                        <button *ngIf="user.isEditing" (click)="saveRow(user)" class="btn btn-success btn-sm">Save</button>
+                    </td>
+                </tr>
+            }
+            </tbody>
+        </table>
+    </div>
+</div>
