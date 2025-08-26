@@ -12,6 +12,7 @@ import { SharedImports } from '../../shared/shared-imports';
 export class List {
   users: any[] = [];
   headers: string[] = [];
+  searchTerm:string='';
 
   constructor(private api: Api, private router: Router) { }
 
@@ -44,6 +45,13 @@ export class List {
     event.stopPropagation();
     user.isEditing = false;
     console.log("Saving full user row:", user);
+  }
+
+  onSearch() {
+    // if(this.searchTerm.length < 2 || this.searchTerm.trim().length < 2) return
+    console.log("Searching for:", this.searchTerm);
+    this.users = this.users.filter(ele => ele.name.includes(this.searchTerm));
+    console.log("Filtered users:", this.users);
   }
 }
 
